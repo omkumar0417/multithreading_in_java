@@ -102,8 +102,8 @@ multithreading is more granular, dealing with multiple threads within the same a
 Multithreading in Java
 
 Java provides robust support for multithreading, allowing
- developers to create applications that can perform multiple tasks simultaneously, 
- improving performance and responsiveness.
+developers to create applications that can perform multiple tasks simultaneously, 
+improving performance and responsiveness.
  
 In Java, multithreading is the concurrent execution of two or more threads to 
 maximize the utilization of the CPU. Java’s multithreading capabilities are 
@@ -119,3 +119,96 @@ A thread is a lightweight process, the smallest unit of processing. Java support
 through its java.lang.Thread class and the java.lang.Runnable interface.
 When a Java program starts, one thread begins running immediately, which is called the main thread. 
 This thread is responsible for executing the main method of a program.
+
+
+
+//code 1 here
+
+To create a new thread in Java, you can either extend the Thread class or 
+implement the Runnable interface.
+
+Method 1: extend the Thread class
+A new class World is created that extends Thread.
+The run method is overridden to define the code that constitutes the new thread.
+start method is called to initiate the new thread.
+public class Test {
+    public static void main(String[] args) {
+        World world = new World();
+        world.start();
+        for (; ; ) {
+            System.out.println("Hello");
+        }
+    }
+}
+public class World extends Thread {
+    @Override
+    public void run() {
+        for (; ; ) {
+            System.out.println("World");
+        }
+    }
+}
+
+
+Method 2: Implement Runnable interface
+
+A new class World is created that implements Runnable.
+The run method is overridden to define the code that constitutes the new thread.
+A Thread object is created by passing an instance of World.
+start method is called on the Thread object to initiate the new thread.
+public class Test {
+    public static void main(String[] args) {
+        World world = new World();
+        Thread thread = new Thread(world);
+        thread.start();
+        for (; ; ) {
+            System.out.println("Hello");
+        }
+    }
+}
+public class World implements Runnable {
+    @Override
+    public void run() {
+        for (; ; ) {
+            System.out.println("World");
+        }
+    }
+}
+
+
+Thread Lifecycle
+
+The lifecycle of a thread in Java consists of several states, which a 
+thread can move through during its execution.
+New: A thread is in this state when it is created but not yet started.
+Runnable: After the start method is called, the thread becomes runnable. 
+It’s ready to run and is waiting for CPU time.
+Running: The thread is in this state when it is executing.
+Blocked/Waiting: A thread is in this state when it is waiting for a 
+resource or for another thread to perform an action.
+Terminated: A thread is in this state when it has finished executing.
+public class MyThread extends Thread{
+    @Override
+    public void run() {
+        System.out.println("RUNNING"); // RUNNING
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        MyThread t1 = new MyThread();
+        System.out.println(t1.getState()); // NEW
+        t1.start();
+        System.out.println(t1.getState()); // RUNNABLE
+        Thread.sleep(100);
+        System.out.println(t1.getState()); // TIMED_WAITING
+        t1.join();
+        System.out.println(t1.getState()); // TERMINATED
+    }
+}
+
+
+
