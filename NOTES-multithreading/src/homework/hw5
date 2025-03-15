@@ -1,0 +1,551 @@
+Here are the answers to your questions:
+
+0. What is a daemon thread?
+
+A daemon thread is a low-priority thread that runs in the background to perform tasks 
+like garbage collection. It automatically terminates when all user threads finish execution.
+
+
+---
+
+1. What is a Thread in Java?
+
+A Thread in Java is a lightweight subprocess that runs independently, 
+enabling multitasking. Java provides the Thread class and the Runnable interface 
+to create and manage threads.
+
+
+---
+
+2. What are the two ways of implementing a thread in Java?
+
+1. Extending the Thread class
+
+2. Implementing the Runnable interface
+
+
+
+
+---
+
+3. What’s the difference between a thread and a process?
+A process is an independent execution unit with its own memory space,
+ while a thread is a lightweight subprocess within a process that shares memory.
+
+Threads are faster to create and switch between, whereas processes require more resources.
+
+
+
+---
+
+4. What’s the difference between class lock and object lock?
+
+Class Lock: Obtained using synchronized on static methods or class-level blocks 
+(synchronized(ClassName.class)).
+
+Object Lock: Acquired when a non-static synchronized method or block is executed.
+
+
+
+---
+
+5. What’s the difference between User thread and Daemon thread?
+
+A User thread is a normal thread that performs application logic and keeps the program 
+running until it completes. It does not terminate unless it finishes execution explicitly.
+
+A Daemon thread, on the other hand, runs in the background and supports user threads by 
+performing tasks like garbage collection. It terminates automatically when all user threads 
+finish execution. Daemon threads have lower priority compared to user threads.
+
+---
+
+6. How can we create daemon threads?
+
+Use the setDaemon(true) method before starting the thread:
+
+Thread t = new Thread(() -> { /* Task */ });
+t.setDaemon(true);
+t.start();
+
+
+---
+
+7. What are the wait() and sleep() methods?
+
+wait(): Releases the lock and pauses until notify() or notifyAll() is called.
+
+sleep(): Puts the thread to sleep for a specified time but does not release the lock.
+
+
+
+---
+
+8. What’s the difference between notify() and notifyAll()?
+
+notify(): Wakes up a single waiting thread.
+
+notifyAll(): Wakes up all waiting threads.
+
+
+
+---
+
+9. What is the start() and run() method of the Thread class?
+
+start(): Starts a new thread and calls run().
+
+run(): Contains the code to execute. Calling run() directly does not start a new thread.
+
+
+
+---
+
+10. Explain thread pool.
+
+A thread pool is a group of pre-created worker threads used to execute multiple tasks efficiently, 
+reducing the overhead of creating and destroying threads.
+
+
+---
+
+11. What’s the purpose of the join() method?
+
+It makes the calling thread wait until the specified thread completes execution.
+
+
+---
+
+12. What do you mean by garbage collection?
+
+Garbage collection in Java is the automatic process of reclaiming memory occupied by unused objects.
+
+
+---
+
+13. Explain volatile variables in Java.
+
+A volatile variable ensures visibility and prevents caching by multiple threads.
+
+
+---
+
+14. How do threads communicate with each other?
+
+Using methods like wait(), notify(), and notifyAll() to synchronize execution.
+
+
+---
+
+15. What is the synchronization process?
+
+Synchronization ensures that only one thread accesses a shared resource at a time.
+
+
+---
+
+16. Why use it? What is thread starvation?
+
+Why use it? To prevent race conditions and data inconsistency.
+
+Thread starvation occurs when a thread is perpetually denied access 
+to resources due to other high-priority threads.
+
+
+
+---
+
+17. Can you start a thread twice?
+
+No, once a thread is started, calling start() again throws IllegalThreadStateException.
+
+
+---
+
+18. What do you mean by inter-thread communication?
+
+It allows threads to communicate using wait(), notify(), and notifyAll().
+
+
+---
+
+19. What is a shutdown hook?
+
+A shutdown hook is a thread that runs before JVM shutdown, used for cleanup tasks.
+
+
+---
+
+20. Explain Thread Group.
+
+A Thread Group is a way to group multiple threads for easier management.
+
+
+---
+
+21. Is it possible to call the run() method directly to start a new thread?
+
+Yes, but it will execute in the current thread instead of a new one.
+
+
+---
+
+22. What are the states in the lifecycle of a Thread?
+
+1. New
+
+
+2. Runnable
+
+
+3. Blocked
+
+
+4. Waiting
+
+
+5. Timed Waiting
+
+
+6. Terminated
+
+
+
+
+---
+
+23. What does the join() method do?
+
+It makes a thread wait for another thread to finish execution.
+
+
+---
+
+24. Can we make a user thread a daemon thread if the thread is started?
+
+No, calling setDaemon(true) after start() throws IllegalThreadStateException.
+
+
+---
+
+25. Explain methods:
+
+public void interrupt()
+
+Interrupts a thread, setting its interrupted flag.
+
+public static boolean interrupted()
+Checks and clears the interrupted flag of the current thread.
+
+public boolean isInterrupted()
+
+Checks if the thread has been interrupted without clearing the flag.
+
+
+
+
+
+
+
+
+
+now in detail
+
+
+
+
+Here are detailed answers to all 26 questions:
+
+
+---
+
+0. What is a daemon thread?
+
+A daemon thread is a low-priority thread that runs in the background and performs tasks that support user threads, such as garbage collection. Daemon threads automatically terminate when all user threads in the application finish execution.
+
+Example:
+
+class MyDaemonThread extends Thread {
+    public void run() {
+        while (true) {
+            System.out.println("Daemon thread running...");
+        }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        MyDaemonThread t = new MyDaemonThread();
+        t.setDaemon(true); // Setting the thread as daemon
+        t.start();
+        System.out.println("Main thread finished execution.");
+    }
+}
+
+
+---
+
+1. What is a Thread in Java?
+
+A Thread in Java is a lightweight subprocess that allows concurrent execution. Java supports multithreading, which helps improve performance by executing multiple tasks simultaneously.
+
+
+---
+
+2. What are the two ways of implementing a thread in Java?
+
+1. Extending the Thread class
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running...");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        MyThread t = new MyThread();
+        t.start();
+    }
+}
+
+
+2. Implementing the Runnable interface
+
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Runnable thread running...");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Thread t = new Thread(new MyRunnable());
+        t.start();
+    }
+}
+
+
+
+
+---
+
+3. What’s the difference between a thread and a process?
+
+A process is an independent execution unit with its own memory space, while a thread is a lightweight subprocess within a process that shares memory.
+
+Threads are faster to create and switch between, whereas processes require more resources.
+
+
+
+---
+
+4. What’s the difference between class lock and object lock?
+
+Class Lock: Obtained using synchronized on static methods or class-level blocks (synchronized(ClassName.class)). It locks the entire class.
+
+Object Lock: Acquired when a non-static synchronized method or block is executed. It locks only the current object.
+
+
+Example:
+
+class SharedResource {
+    public static synchronized void classLock() {
+        System.out.println("Class lock method");
+    }
+
+    public synchronized void objectLock() {
+        System.out.println("Object lock method");
+    }
+}
+
+
+---
+
+5. What’s the difference between User thread and Daemon thread?
+
+A User thread executes application logic and does not terminate until it finishes. A Daemon thread runs in the background, supporting user threads, and terminates automatically when all user threads finish execution.
+
+
+---
+
+6. How can we create daemon threads?
+
+Call setDaemon(true) before starting the thread.
+
+Thread t = new Thread(() -> System.out.println("Daemon thread running"));
+t.setDaemon(true);
+t.start();
+
+
+---
+
+7. What are the wait() and sleep() methods?
+
+wait(): Releases the lock and waits until notify() or notifyAll() is called.
+
+sleep(): Puts the thread to sleep for a specified time but does not release the lock.
+
+
+
+---
+
+8. What’s the difference between notify() and notifyAll()?
+
+notify() wakes up a single waiting thread.
+
+notifyAll() wakes up all waiting threads.
+
+
+
+---
+
+9. What is the start() and run() method of the Thread class?
+
+start(): Starts a new thread and calls run().
+
+run(): Contains the code to execute but does not start a new thread if called directly.
+
+
+
+---
+
+10. Explain thread pool.
+
+A thread pool is a group of pre-created worker threads that execute multiple tasks efficiently, reducing thread creation overhead. Java provides ExecutorService for managing thread pools.
+
+
+---
+
+11. What’s the purpose of the join() method?
+
+It makes the calling thread wait until another thread completes execution.
+
+
+---
+
+12. What do you mean by garbage collection?
+
+Garbage collection in Java automatically removes unused objects to free memory.
+
+
+---
+13. Explain volatile variables in Java.
+
+A volatile variable ensures visibility and prevents caching by multiple threads.
+
+
+---
+
+14. How do threads communicate with each other?
+
+Using wait(), notify(), and notifyAll() for synchronized execution.
+
+
+---
+
+15. What is the synchronization process?
+
+Synchronization ensures that only one thread accesses a shared resource at a time.
+
+
+---
+
+16. Why use it? What is thread starvation?
+
+Why use synchronization? To prevent race conditions.
+
+Thread starvation occurs when a thread is perpetually denied access to resources.
+
+
+
+---
+
+17. Can you start a thread twice?
+
+No, calling start() again on a started thread throws IllegalThreadStateException.
+
+
+---
+
+18. What do you mean by inter-thread communication?
+
+It allows threads to communicate using wait(), notify(), and notifyAll().
+
+
+---
+
+19. What is a shutdown hook?
+
+A shutdown hook is a thread that runs before JVM shutdown for cleanup.
+
+
+---
+
+20. Explain Thread Group.
+
+A Thread Group manages multiple threads as a single unit.
+
+
+---
+
+21. Is it possible to call the run() method directly to start a new thread?
+
+Yes, but it executes in the current thread instead of a new one.
+
+
+---
+
+22. What are the states in the lifecycle of a Thread?
+
+1. New
+
+
+2. Runnable
+
+
+3. Blocked
+
+
+4. Waiting
+
+
+5. Timed Waiting
+
+
+6. Terminated
+
+
+
+
+---
+
+23. What does the join() method do?
+
+It makes a thread wait for another thread to finish execution.
+
+
+---
+
+24. Can we make a user thread a daemon thread if the thread is started?
+
+No, calling setDaemon(true) after start() throws IllegalThreadStateException.
+
+
+---
+
+25. Explain methods:
+
+public void interrupt()
+
+Interrupts a thread, setting its interrupted flag.
+
+public static boolean interrupted()
+
+Checks and clears the interrupted flag of the current thread.
+
+public boolean isInterrupted()
+
+Checks if the thread has been interrupted without clearing the flag.
+
+
+---
+
+Let me know if you need further explanations!

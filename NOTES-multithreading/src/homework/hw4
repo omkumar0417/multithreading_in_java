@@ -1,0 +1,421 @@
+
+
+1. Name the method that is used to register a thread in a thread scheduler.
+
+A. register()
+
+B. run()
+
+C. start()      //answer
+
+D. None of the above
+
+
+
+2. Which of the following method needs to be defined by a class that 
+is implementing java.lang.Runnable interface?
+
+A. public void run()   //answer
+
+B. public void start()
+
+C. void run()
+
+D. None of the above
+
+
+
+3. What is thread priority in Java?
+
+A. Float
+
+B. Integer  //answer
+
+C. Double
+
+D. None of the above
+
+
+
+4. Which of the following is not a valid constructor of the Thread class?
+
+A. Thread(String name)
+
+B. Thread(Runnable target, String name)
+
+C. Thread(Runnable target, Object obj)  //answer
+
+D. None of the above
+
+
+
+5. When is the thread considered dead?
+
+A. In sleep state
+
+B. When it’s yet to start execution
+
+C. When run method finishes  //answer
+
+D. While waiting for I/O
+
+
+
+6. How can a thread be created in Java multi-threading?
+
+A. Extended Thread Class
+
+B. Implementing Runnable Interface
+
+C. Both A and B  //answer
+
+D. None of the above
+
+
+
+7. Multithreading is defined as…
+
+A. A process where a single process can have access to the information from different sources.
+
+B. A process where two different processes can run simultaneously.  
+
+C. A process where two or more parts of the same process run simultaneously.  //answer
+
+D. A process where different processes can have access to the same information.
+
+
+
+8. Name the method of the thread that is called before the run() method and carries out initialization.
+
+A. start()  //answer
+
+B. resume()
+
+C. suspend()
+
+D. None of the above
+
+
+
+9. In the following Java program, what is the name of the thread?
+
+class multithreaded_programing {
+    public static void main(String args[]) {
+        Thread t = Thread.currentThread();
+        System.out.println(t);
+    }
+}
+
+A. Thread
+
+B. Main  //answer
+
+C. System
+
+D. None of the above
+
+
+
+10. Predict the output of the following code:
+
+
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Running");
+    }
+}
+
+class ThreadTest {
+    public static void main(String args[]) throws InterruptedException {
+        Runnable r = new MyThread(); // #1
+        Thread myThread = new Thread(r); // #2
+        myThread.start();
+    }
+}
+
+A. Compilation error at statement #1  //answer
+
+B. Compilation error at statement #2
+
+C. Print "Running" in the console
+
+D. Doesn’t print any output in the console
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Answers:
+
+1. C. start()
+
+
+2. A. public void run()
+
+
+3. B. Integer
+
+
+4. C. Thread(Runnable target, Object obj)
+
+
+5. C. When run method finishes
+
+
+6. C. Both A and B
+
+
+7. C. A process where two or more parts of the same process run simultaneously.
+
+
+8. A. start()
+
+
+9. B. Main
+
+
+10. C. Print "Running" in the console
+
+
+
+
+---
+
+Explanations:
+
+1. Name the method that is used to register a thread in a thread scheduler.
+
+The start() method is responsible for registering the thread with the thread scheduler and then invoking the run() method. The run() method only executes the thread's task but does not start it.
+
+
+
+2. Which of the following method needs to be defined by a class that is implementing java.lang.Runnable interface?
+
+When a class implements the Runnable interface, it must override the public void run() method. This is where the thread's execution logic is written.
+
+
+
+3. What is thread priority in Java?
+
+Java thread priorities are represented as integers ranging from 1 (MIN_PRIORITY) to 10 (MAX_PRIORITY). Therefore, the correct answer is Integer.
+
+
+
+4. Which of the following is not a valid constructor of the Thread class?
+
+Thread(Runnable target, Object obj) is not a valid constructor in Java. The correct constructors include Thread(String name), Thread(Runnable target), and Thread(Runnable target, String name).
+
+
+
+5. When is the thread considered dead?
+
+A thread is considered dead once its run() method completes execution. Even if the thread was started using start(), it will be in a dead state after execution finishes.
+
+
+
+6. How can a thread be created in Java multi-threading?
+
+Java supports multithreading using two approaches:
+
+Extending the Thread class
+
+Implementing the Runnable interface
+
+
+Since both methods are valid, the correct answer is Both A and B.
+
+
+
+7. Multithreading is defined as…
+
+Multithreading allows multiple parts (threads) of the same process to execute simultaneously. This enhances performance by utilizing CPU cores efficiently.
+
+
+
+8. Name the method of the thread that is called before the run() method and carries out initialization.
+
+The start() method is responsible for thread initialization and execution. It ensures that the run() method is invoked in a separate thread.
+
+
+
+9. In the following Java program, what is the name of the thread?
+
+class multithreaded_programing {
+    public static void main(String args[]) {
+        Thread t = Thread.currentThread();
+        System.out.println(t);
+    }
+}
+
+The Thread.currentThread() method returns the currently executing thread, which in this case is the main thread. The output will contain "Thread[main,5,main]", so the correct answer is "Main".
+
+
+
+10. Predict the output of the following code:
+
+
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Running");
+    }
+}
+
+class ThreadTest {
+    public static void main(String args[]) throws InterruptedException {
+        Runnable r = new MyThread(); // #1
+        Thread myThread = new Thread(r); // #2
+        myThread.start();
+    }
+}
+
+The MyThread class extends Thread, but since Thread implements Runnable, it can be referenced by a Runnable variable.
+
+The Thread constructor accepts a Runnable object and starts the thread.
+
+Since run() is correctly overridden, "Running" will be printed to the console.
+
+
+Let me know if you need further clarification!
+
+
+
+
+
+
+
+
+
+Detailed Explanation for Question 4
+
+Question:
+
+Which of the following is not a valid constructor of the Thread class?
+
+A. Thread(String name)
+
+B. Thread(Runnable target, String name)
+
+C. Thread(Runnable target, Object obj)
+
+D. None of the above
+
+
+Answer: C. Thread(Runnable target, Object obj)
+
+Explanation:
+
+The Thread class in Java provides several constructors, including:
+
+1. Thread() – Creates a new thread without specifying any task.
+
+
+2. Thread(String name) – Creates a new thread with a given name.
+
+
+3. Thread(Runnable target) – Creates a new thread that will execute the run() method of the provided Runnable object.
+
+
+4. Thread(Runnable target, String name) – Creates a new thread with a specific name and associates it with a Runnable target.
+
+
+
+However, Thread(Runnable target, Object obj) is not a valid constructor in Java. There is no constructor in Thread that accepts an Object as the second argument.
+
+
+---
+
+Detailed Explanation for Question 10
+
+Question:
+
+Predict the output of the following code:
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Running");
+    }
+}
+
+class ThreadTest {
+    public static void main(String args[]) throws InterruptedException {
+        Runnable r = new MyThread(); // #1
+        Thread myThread = new Thread(r); // #2
+        myThread.start();
+    }
+}
+
+Answer: C. Print "Running" in the console
+
+Step-by-step Explanation:
+
+1. Understanding MyThread extends Thread
+
+MyThread is a subclass of Thread, so it inherits all Thread class properties, including the run() method.
+
+It overrides the run() method to print "Running".
+
+
+
+2. Runnable Reference in main()
+
+Runnable r = new MyThread(); // #1
+
+This may seem confusing because MyThread extends Thread, but since Thread implements Runnable, it can be assigned to a Runnable reference (r).
+
+
+
+3. Creating a Thread Object with a Runnable Parameter
+
+Thread myThread = new Thread(r); // #2
+
+This creates a Thread instance and associates it with MyThread (which implements Runnable).
+
+The Thread constructor Thread(Runnable target) is valid and calls the run() method of the passed Runnable object when start() is invoked.
+
+
+
+4. Starting the Thread
+
+myThread.start();
+
+This starts a new thread and calls run() of MyThread, printing:
+
+
+Running
+
+
+
+Common Misconception:
+
+Some may think there’s a compilation error because MyThread is assigned to a Runnable reference. However, since Thread itself implements Runnable, this is perfectly valid.
+
+Thus, the correct answer is C. Print "Running" in the console.
+
+
+---
+
+Let me know if you need any more clarification!
+
