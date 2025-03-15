@@ -23,3 +23,21 @@ A program is a set of instructions written in a programming language that
 tells the computer how to perform a specific task
 
 Microsoft Word is a program that allows users to create and edit documents.
+
+
+Process
+A process is an instance of a program that is being executed. 
+When a program runs, the operating system creates 
+a process to manage its execution.
+When we open Microsoft Word, it becomes a process 
+in the operating system.
+
+
+
+Thread
+A thread is the smallest unit of execution within a process. 
+A process can have multiple threads, which share the 
+same resources but can run independently.
+
+A web browser like Google Chrome might use multiple 
+threads for different tabs, with each tab running as a separate thread.
