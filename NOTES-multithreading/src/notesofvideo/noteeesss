@@ -1,1 +1,25 @@
-trying to push
+NOTES OF MULTITHREADING
+
+CPU
+The CPU, often referred to as the brain of the computer, 
+is responsible for executing instructions from programs. 
+It performs basic arithmetic, logic, control, and 
+input/output operations specified by the instructions.
+
+
+Core
+A core is an individual processing unit within a CPU. 
+Modern CPUs can have multiple cores, allowing them 
+to perform multiple tasks simultaneously.
+
+A quad-core processor has four cores, allowing it 
+to perform four tasks simultaneously. For instance, one 
+core could handle your web browser, another your music player, 
+another a download manager, and another a background system update.
+
+
+Program
+A program is a set of instructions written in a programming language that 
+tells the computer how to perform a specific task
+
+Microsoft Word is a program that allows users to create and edit documents.
